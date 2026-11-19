@@ -1,7 +1,7 @@
 
 # TP Cloth Simulation
 
-Based on the paper : https://graphics.stanford.edu/~mdfisher/cloth.html
+Based on the paper : <https://graphics.stanford.edu/~mdfisher/cloth.html>
 
 Using the spring-based approach (Mass-Spring Model)
 
