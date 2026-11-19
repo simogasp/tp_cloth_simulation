@@ -8,9 +8,38 @@
     <artifactId>cloth-simulation</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <profiles>
+        <profile>
+            <id>macos-arm64</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                    <arch>aarch64</arch>
+                </os>
+            </activation>
+            <properties>
+                <lwjgl.natives>natives-macos-arm64</lwjgl.natives>
+                <app.exec.args>-XstartOnFirstThread -classpath %classpath Main</app.exec.args>
+            </properties>
+        </profile>
+        <profile>
+            <id>windows-x64</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                    <arch>amd64</arch>
+                </os>
+            </activation>
+            <properties>
+                <lwjgl.natives>natives-windows</lwjgl.natives>
+            </properties>
+        </profile>
+    </profiles>
+
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <app.exec.args>-classpath %classpath Main</app.exec.args>
         <lwjgl.version>3.4.1</lwjgl.version>
         <lwjgl.natives>natives-linux</lwjgl.natives>
     </properties>
@@ -68,6 +97,8 @@
                 <version>3.5.1</version>
                 <configuration>
                     <mainClass>Main</mainClass>
+                    <executable>${java.home}/bin/java</executable>
+                    <commandlineArgs>${app.exec.args}</commandlineArgs>
                 </configuration>
             </plugin>
         </plugins>
